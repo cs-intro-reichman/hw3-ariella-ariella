@@ -81,7 +81,7 @@ public class Algebra {
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
 		int guess = 1;
-		while (minus(pow(guess, 2), x) <= guess) {
+		while (minus(pow(guess, 2), x) <= 0) {
 			guess++;
 		}
 		return guess;
