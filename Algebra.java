@@ -15,6 +15,10 @@ public class Algebra {
    		System.out.println(pow(3,5));      // 3^5
    		System.out.println(div(12,3));   // 12 / 3    
    		System.out.println(div(5,5));    // 5 / 5  
+		System.out.println(div(1,2));    // 1 / 2 
+		System.out.println(div(0,2));    // 0 / 2 
+		System.out.println(div(2,2));    // 2 / 2 
+		System.out.println(div(3,2));    // 3 / 2 
    		System.out.println(div(25,7));   // 25 / 7
    		System.out.println(mod(25,7));   // 25 % 7
    		System.out.println(mod(120,6));  // 120 % 6    
@@ -25,43 +29,61 @@ public class Algebra {
 
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int sum = x1;
+		for (int i = 0; i < x2; i++) {
+			sum++;
+		}
+		return sum;
 	}
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int difference = x1;
+		for (int i = 0; i < x2; i++) {
+			difference--;
+		}
+		return difference;
 	}
 
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int product = 0;
+		for (int i = 0; i < x2; i++) {
+			product = plus(product, x1);
+		}
+		return product;
 	}
 
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
-		// Replace the following statement with your code
-		return 0;
+		int power = 1;
+		for (int i = 0; i < n; i++) {
+			power = times(power, x);
+		}
+		return power;
 	}
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int quotient = 0;
+		while (x1 >= times(x2, quotient)) {
+			quotient++;
+		}
+		return quotient - 1;
 	}
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int remainder = x1 - times(x2, div(x1, x2));
+		return remainder;
 	}	
 
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
-		// Replace the following statement with your code
-		return 0;
+		int guess = 1;
+		while (minus(pow(guess, 2), x) <= guess) {
+			guess++;
+		}
+		return guess;
 	}	  	  
 }
