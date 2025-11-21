@@ -30,8 +30,14 @@ public class Algebra {
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
 		int sum = x1;
-		for (int i = 0; i < x2; i++) {
-			sum++;
+		if (x2 >= 0) {
+			for (int i = 0; i < x2; i++) {
+				sum++;
+			}
+		} else {
+			for (int i = 0; i > x2; i--) {
+				sum--;
+			}
 		}
 		return sum;
 	}
@@ -39,8 +45,14 @@ public class Algebra {
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
 		int difference = x1;
-		for (int i = 0; i < x2; i++) {
-			difference--;
+		if (x2 >= 0) {
+			for (int i = 0; i < x2; i++) {
+				difference--;
+			}
+		} else {
+			for (int i = 0; i > x2; i--) {
+				difference++;
+			}
 		}
 		return difference;
 	}
@@ -48,14 +60,23 @@ public class Algebra {
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
 		int product = 0;
-		for (int i = 0; i < x2; i++) {
-			product = plus(product, x1);
+		if(x2 >= 0) {
+			for (int i = 0; i < x2; i++) {
+				product = plus(product, x1);
+			}
+		} else {
+			for (int i = 0; i > x2; i--) {
+				product = minus(product, x1);
+			}
 		}
 		return product;
 	}
 
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
+		if (n == 0) {
+			return 1;
+		}
 		int power = 1;
 		for (int i = 0; i < n; i++) {
 			power = times(power, x);
@@ -66,10 +87,34 @@ public class Algebra {
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
 		int quotient = 0;
-		while (x1 >= times(x2, quotient)) {
-			quotient++;
+		if (x2 == 0) {
+			return -1;
+		} else if (x1 == 0) {
+			return 0;
+		} else if (x1 > 0) {
+			while (x1 > times(x2, quotient)) {
+				if (x2 > 0) {
+					quotient++;
+				} else {
+					quotient--; 
+				}
+			}
+		} else if (x1 < 0) {
+			while (x1 < times(x2, quotient)) {
+				if (x2 > 0){
+					quotient--;
+				} else {
+					quotient++;
+				}
+			}
 		}
-		return minus(quotient, 1);
+		if (times(x2, quotient) == x1) {
+			return quotient;
+		} else if (quotient > 0) {
+			return --quotient;
+		} else {
+			return ++quotient;
+		}
 	}
 
 	// Returns x1 % x2
