@@ -22,9 +22,9 @@ public class Algebra {
    		System.out.println(div(25,7));   // 25 / 7
    		System.out.println(mod(25,7));   // 25 % 7
    		System.out.println(mod(120,6));  // 120 % 6    
-   		System.out.println(sqrt(36));
-		System.out.println(sqrt(263169));
-   		System.out.println(sqrt(76123));
+   		System.out.println("answer" + sqrt(36));
+		System.out.println("answer" + sqrt(263169));
+   		System.out.println("answer" + sqrt(76123));
 	}  
 
 	// Returns x1 + x2
@@ -69,21 +69,28 @@ public class Algebra {
 		while (x1 >= times(x2, quotient)) {
 			quotient++;
 		}
-		return quotient - 1;
+		return minus(quotient, 1);
 	}
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
-		int remainder = x1 - times(x2, div(x1, x2));
+		int remainder = minus(x1, times(x2, div(x1, x2)));
 		return remainder;
 	}	
 
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
-		int guess = 1;
-		while (minus(pow(guess, 2), x) <= 0) {
-			guess++;
+		if (x < 2) {
+			return x;
 		}
-		return guess;
-	}	  	  
+		int g = x;
+		while (times(g, g) > x) {
+			g = div(plus(g, div(x, g)), 2);
+		}
+		return g;
+	}
 }
+
+
+
+
